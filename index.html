@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizing the Titanic Data Set</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing the Titanic Data Set">
+  <meta name="author" content="Dimitri Papaioannou">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Visualizing the Titanic Data Set</h1>
+    <h2>An Exercise in Frustration</h2>
+    <p>Dimitri Papaioannou<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Objective</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>My initial objective was to create a visualization tool for classification data sets with a binary output.</p>
+
+<p>I was going to use ggplot2 to create informative charts based on the type of the predictor variable (number, factor, etc)</p>
+
+<p><b>BUT</b>, it turns out that even if you write perfectly working R code, it does not mean you can get it to run on shiny.</p>
+
+<p>So, after several iterations of reducing scope, I ended up creating a simple plotting tool for the Titanic data set provided by Kaggle. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>App Description</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The simple shiny shows the distribution of the predictor for those who survived and those who died.</p>
+
+<ol>
+<li>Load the Titanic data set from the Kaggle Competition</li>
+<li>The user chooses a predictor from the shiny UI</li>
+<li>Create a simple plot showing how the predictor is distributed for the survivors and the dead</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Preparing the Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Here is a code snippet that loads the data. This code executes once when the server runs</p>
+
+<pre><code class="r">data &lt;- read.csv(&quot;train.csv&quot;)
+
+cdata &lt;- 
+    data.frame(Survived=data$Survived, 
+               Pclass=data$Pclass,
+               Sex = data$Sex,
+               Age = data$Age, 
+               Fare = data$Fare, 
+               Embarked = data$Embarked)
+
+cdata$Survived &lt;- as.factor(ifelse(cdata$Survived==0,&#39;Died&#39;,&#39;Survived&#39;))
+cdata$Pclass &lt;- as.factor(cdata$Pclass)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Sample Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Here is a sample of the plots created</p>
+
+<p><img src="assets/fig/unnamed-chunk-2.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Conclusion</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In conclusion, there is no reason to waste more time learning shiny. 
+Creating an app seems deceptivly simple, but getting the app to do what you want is an exercise in frustration.</p>
+
+<p>It is much better to invest time learning a proper Javascript package for interactive charts.</p>
+
+<p>Slidify is pretty cool though.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Objective'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='App Description'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Preparing the Data'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Sample Plot'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Conclusion'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
